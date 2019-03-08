@@ -1,1 +1,3 @@
-work	"reading_test.vhd"
+work	"UAL.vhd"
+work	"UCP.vhd"
+work	"testUCP.vhd"

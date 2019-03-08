@@ -1,9 +1,13 @@
 
-int max(int x,int y){
-	daca(x>=y){
-		intoarce x; 
+int f(int x,int y){
+
+	int r,j;
+	r=x;
+	j=y;
+	daca(r==j){
+		intoarce r; 
 	}altfel{
-		intoarce y;
+		intoarce j;
 	}
 
 };
@@ -49,6 +53,13 @@ main() {
 
 	}
 
-	f1=max(a,g);
+	f1=f(a,b);
+    	f2=f(c,i);
+	t=f(f1,f2);
 
+	daca(a==5){
+		z=5;}
+	altfel{
+	z=3;
+		}
 }
