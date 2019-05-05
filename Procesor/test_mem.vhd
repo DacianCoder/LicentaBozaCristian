@@ -41,7 +41,7 @@ ARCHITECTURE behavior OF test_mem IS
  
     COMPONENT memory
     PORT(
-         Bus_address : IN  std_logic_vector(15 downto 0);
+         Bus_address : IN  std_logic_vector(7 downto 0);
          Bus_control : IN  std_logic_vector(1 downto 0);
          Bus_data : INOUT  std_logic_vector(15 downto 0);
          Clk : IN  std_logic
@@ -50,7 +50,7 @@ ARCHITECTURE behavior OF test_mem IS
     
 
    --Inputs
-   signal Bus_address : std_logic_vector(15 downto 0) := (others => '0');
+   signal Bus_address : std_logic_vector(7 downto 0) := (others => '0');
    signal Bus_control : std_logic_vector(1 downto 0) := (others => '0');
    signal Clk : std_logic := '0';
 
@@ -86,7 +86,7 @@ BEGIN
       -- hold reset state for 100 ns.
       wait for 10ns;
 		
-		 Bus_address <= x"0001", x"0002" after 20 ns,            x"0001" after 40 ns;
+		 Bus_address <= x"01", x"02" after 20 ns,            x"01" after 40 ns;
        Bus_control <=    "01",    "01" after 20 ns,               "00" after 40 ns;
        Bus_data    <= x"ab21", x"1222" after 20 ns, "ZZZZZZZZZZZZZZZZ" after 40 ns;
      

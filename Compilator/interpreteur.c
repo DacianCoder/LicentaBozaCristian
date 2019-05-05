@@ -49,6 +49,7 @@ for(int i=0;i<=indexInst;i++){
 
 	} else if(strcmp(instr[i].operation, "STORE") == 0){ 
 		fprintf(f, "instr_mem(%d)<=x\"04%02x%04x\";\n",i,instr[i].a , instr[i].b);
+		printf("instr_mem(%d)<=x\"04%02x  %04x\";\n",i,instr[i].a , instr[i].b);
 	
 	} else if(strcmp(instr[i].operation, "LOAD") == 0){
 		fprintf(f, "instr_mem(%d)<=x\"05%02x%04x\";\n",i,instr[i].a , instr[i].b);
@@ -58,10 +59,8 @@ for(int i=0;i<=indexInst;i++){
 		fprintf(f, "instr_mem(%d)<=x\"06%02x%04x\";\n",i,instr[i].a , instr[i].b);
 
 
-
 	} else if(strcmp(instr[i].operation, "EQU") == 0){
 		fprintf(f, "instr_mem(%d)<=x\"07%02x%04x\";\n",i,instr[i].a , instr[i].b);
-
 
 
 	} else if(strcmp(instr[i].operation, "INF") == 0){
@@ -69,31 +68,28 @@ for(int i=0;i<=indexInst;i++){
 
 
 	} else if(strcmp(instr[i].operation, "INFE") == 0){
-		fprintf(f, "instr_mem(%d)<=x\"09%02x%04x\" ;\n",i,instr[i].a , instr[i].b);
+		fprintf(f, "instr_mem(%d)<=x\"09%02x%04x\";\n",i,instr[i].a , instr[i].b);
 
 
 	} else if(strcmp(instr[i].operation, "SUP") == 0){
 		fprintf(f, "instr_mem(%d)<=x\"0a%02x%04x\";\n",i,instr[i].a , instr[i].b);
 
 
-
 	} else if(strcmp(instr[i].operation, "SUPE") == 0){
 		fprintf(f, "instr_mem(%d)<=x\"0b%02x%04x\";\n",i,instr[i].a , instr[i].b);
 
-	} else if(strcmp(instr[i].operation, "JMPC") == 0){
-		fprintf(f, "instr_mem(%d)<=x\"0c%02x%04x\" ;\n",i,instr[i].a , instr[i].b);
+	} else if(strcmp(instr[i].operation, "JMP") == 0){
+		fprintf(f, "instr_mem(%d)<=x\"0c%02x%04x\";\n",i,instr[i].a , instr[i].b);
 
-	} else if(strcmp(instr[i].operation, "CALL") == 0){	
+	} else if(strcmp(instr[i].operation, "JMPC") == 0){
 		fprintf(f, "instr_mem(%d)<=x\"0d%02x%04x\";\n",i,instr[i].a , instr[i].b);
 
-	} else if(strcmp(instr[i].operation, "RET") == 0){	
-		
+	} else if(strcmp(instr[i].operation, "CALL") == 0){	
 		fprintf(f, "instr_mem(%d)<=x\"0e%02x%04x\";\n",i,instr[i].a , instr[i].b);
-	
-	} else if(strcmp(instr[i].operation, "PRT") == 0){	
-		
-	
+
+	} else if(strcmp(instr[i].operation, "RET") == 0){	
 		fprintf(f, "instr_mem(%d)<=x\"0f%02x%04x\";\n",i,instr[i].a , instr[i].b);
+	
 	} 
 
 	}
@@ -180,6 +176,7 @@ void instructionExecute(int i){
 		}
 
 	} else if(strcmp(instr[i].operation, "STORE") == 0){ 
+		printf("%d   %d ::  %d  %d\n",instr[i].a,registers[instr[i].a],instr[i].b,registers[instr[i].b]);
 
 		memory[registers[instr[i].a]] = registers[instr[i].b];
 

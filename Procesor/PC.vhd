@@ -86,7 +86,7 @@ begin
 
 CPU : UCP          port map(bus_address,bus_control,bus_data,Clk,bus_interuptions);
 MEM : memory       port map(bus_address,bus_control,bus_data,Clk);
-Peripherics: IO port map(bus_address,bus_control,bus_data,Clk,bus_interuptions);
+Peripherics: IO 	 port map(bus_address,bus_control,bus_data,Clk,bus_interuptions);
 
 
 
