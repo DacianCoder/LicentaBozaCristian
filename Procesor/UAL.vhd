@@ -83,21 +83,5 @@ begin
 		 Ssup_eq when op=x"0b" else
 		 "ZZZZZZZZZZZZZZZZ" when op="ZZZZZZZZ"; -- default
 		 
-		 
-		 
-		 -- else -- must add a default mode to it !
-	  --  report "unreachable" when others;
-	  
- --Flag<=Sadd(16) when op=x"0" else
---		 Ssub(16) when op=x"1" else
-	--	 Smul(31) when op=x"2"; -- else -- must add a default mode to it !
-	  --  report "unreachable" when others;
-		 
-		 
- 
-
-
-
-
 end Behavioral;
 

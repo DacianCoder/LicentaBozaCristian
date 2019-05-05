@@ -42,6 +42,7 @@ ARCHITECTURE behavior OF test_pc IS
     COMPONENT PC
     PORT(
          Show_data : OUT  std_logic_vector(15 downto 0);
+			 Select_data: std_logic_vector(7 downto 0);
          Clk : IN  std_logic
         );
     END COMPONENT;
@@ -52,39 +53,16 @@ ARCHITECTURE behavior OF test_pc IS
 
  	--Outputs
    signal Show_data : std_logic_vector(15 downto 0);
-
-   -- Clock period definitions
-   constant Clk_period : time := 10 ns;
+	signal Select_data: std_logic_vector(7 downto 0);
  
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
    uut: PC PORT MAP (
           Show_data => Show_data,
-          Clk => Clk
+          Clk => Clk,
+			 Select_data => Select_data
         );
 
-   -- Clock process definitions
-   Clk_process :process
-   begin
-		Clk <= '0';
-		wait for Clk_period/2;
-		Clk <= '1';
-		wait for Clk_period/2;
-   end process;
- 
-
-   -- Stimulus process
-   stim_proc: process
-   begin		
-      -- hold reset state for 100 ns.
-      wait for 100 ns;	
-
-      wait for Clk_period*10;
-
-      -- insert stimulus here 
-
-      wait;
-   end process;
 
 END;

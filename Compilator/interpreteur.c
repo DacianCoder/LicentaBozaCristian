@@ -33,6 +33,7 @@ if (f == NULL)
 
 
 
+
 for(int i=0;i<=indexInst;i++){
 
 	if(strcmp(instr[i].operation, "ADD") == 0){
@@ -99,6 +100,7 @@ fclose(f);
 
 
 }
+
 
 
 

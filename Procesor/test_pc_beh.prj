@@ -1,4 +1,6 @@
+vhdl work "pckg.vhd"
 vhdl work "UAL.vhd"
+vhdl work "read_text.vhd"
 vhdl work "UCP.vhd"
 vhdl work "memory.vhd"
 vhdl work "IO.vhd"

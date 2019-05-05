@@ -32,6 +32,7 @@ USE ieee.numeric_std.ALL;
 
 entity PC is
     Port ( Show_data : out  STD_LOGIC_VECTOR (15 downto 0);
+			  Select_data : in  STD_LOGIC_VECTOR (7 downto 0);
 				Clk: in std_logic);
 end PC;
 
@@ -90,14 +91,9 @@ Peripherics: IO 	 port map(bus_address,bus_control,bus_data,Clk,bus_interuptions
 
 
 
-process
-
- begin
- wait for 50ns;
-  wait until rising_edge(Clk); 
+process(Clk)
+begin
   
-	
-
 end process;
 
 
