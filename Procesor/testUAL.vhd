@@ -53,7 +53,7 @@ ARCHITECTURE behavior OF testUAL IS
    --Inputs
    signal A : std_logic_vector(15 downto 0) := (others => '0');
    signal B : std_logic_vector(15 downto 0) := (others => '0');
-   signal Op : std_logic_vector(7 downto 0) := (others => '0');
+   signal Op : std_logic_vector(3 downto 0) := (others => '0');
 	signal Clk : std_logic := '0';
 
  	--Outputs
@@ -92,7 +92,7 @@ BEGIN
 		
 		A <= x"0120", x"023A" after 100 ns, x"002A" after 200 ns, x"002A" after 300 ns, x"02A0" after 400 ns;
 		B <= x"103F", x"0F0F" after 100 ns, x"002A" after 200 ns;
-		Op<= x"00", x"01" after 100 ns, x"02" after 200 ns;--, x"3" after 300 ns, x"4" after 400 ns;
+		Op<= x"0", x"1" after 100 ns, x"2" after 200 ns;--, x"3" after 300 ns, x"4" after 400 ns;
 			
 			
       -- insert stimulus here 

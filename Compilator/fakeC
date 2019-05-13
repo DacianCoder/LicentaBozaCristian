@@ -9,7 +9,7 @@ int max(int x,int y){
 
 main() {
 
-	int b=10,c;
+	int b=16,c;
 	int a=5,i;
 	int g;
 	int max;

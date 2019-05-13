@@ -33,63 +33,62 @@ if (f == NULL)
 
 
 
-
 for(int i=0;i<=indexInst;i++){
 
 	if(strcmp(instr[i].operation, "ADD") == 0){
-		fprintf(f, "instr_mem(%d)<=x\"00%02x%04x\";\n",i,instr[i].a , instr[i].b);
+		fprintf(f, "00%02x%04x\n",instr[i].a , instr[i].b);
 
 	} else if(strcmp(instr[i].operation, "SUB") == 0){
-		fprintf(f, "instr_mem(%d)<=x\"01%02x%04x\";\n",i,instr[i].a , instr[i].b);
+		fprintf(f, "01%02x%04x\n",instr[i].a , instr[i].b);
 
 	} else if(strcmp(instr[i].operation, "MUL") == 0){
-		fprintf(f, "instr_mem(%d)<=x\"02%02x%04x\";\n",i,instr[i].a , instr[i].b);
+		fprintf(f, "02%02x%04x\n",instr[i].a , instr[i].b);
 
 	} else if(strcmp(instr[i].operation, "DIV") == 0){
-		fprintf(f, "instr_mem(%d)<=x\"03%02x%04x\";\n",i,instr[i].a , instr[i].b);
+		fprintf(f, "03%02x%04x\n",instr[i].a , instr[i].b);
 
 	} else if(strcmp(instr[i].operation, "STORE") == 0){ 
-		fprintf(f, "instr_mem(%d)<=x\"04%02x%04x\";\n",i,instr[i].a , instr[i].b);
-		printf("instr_mem(%d)<=x\"04%02x  %04x\";\n",i,instr[i].a , instr[i].b);
+		fprintf(f, "04%02x%04x\n",instr[i].a , instr[i].b);
+		printf("04%02x  %04x\n",instr[i].a , instr[i].b);
 	
 	} else if(strcmp(instr[i].operation, "LOAD") == 0){
-		fprintf(f, "instr_mem(%d)<=x\"05%02x%04x\";\n",i,instr[i].a , instr[i].b);
+		fprintf(f, "05%02x%04x\n",instr[i].a , instr[i].b);
 
 
 	} else if(strcmp(instr[i].operation, "AFC") == 0){
-		fprintf(f, "instr_mem(%d)<=x\"06%02x%04x\";\n",i,instr[i].a , instr[i].b);
+		fprintf(f, "06%02x%04x\n",instr[i].a , instr[i].b);
 
 
 	} else if(strcmp(instr[i].operation, "EQU") == 0){
-		fprintf(f, "instr_mem(%d)<=x\"07%02x%04x\";\n",i,instr[i].a , instr[i].b);
+		fprintf(f, "07%02x%04x\n",instr[i].a , instr[i].b);
 
 
 	} else if(strcmp(instr[i].operation, "INF") == 0){
-		fprintf(f, "instr_mem(%d)<=x\"08%02x%04x\";\n",i,instr[i].a , instr[i].b);
+		fprintf(f, "08%02x%04x\n",instr[i].a , instr[i].b);
 
 
 	} else if(strcmp(instr[i].operation, "INFE") == 0){
-		fprintf(f, "instr_mem(%d)<=x\"09%02x%04x\";\n",i,instr[i].a , instr[i].b);
+		fprintf(f, "09%02x%04x\n",instr[i].a , instr[i].b);
 
 
 	} else if(strcmp(instr[i].operation, "SUP") == 0){
-		fprintf(f, "instr_mem(%d)<=x\"0a%02x%04x\";\n",i,instr[i].a , instr[i].b);
+		fprintf(f, "0a%02x%04x\n",instr[i].a , instr[i].b);
 
 
 	} else if(strcmp(instr[i].operation, "SUPE") == 0){
-		fprintf(f, "instr_mem(%d)<=x\"0b%02x%04x\";\n",i,instr[i].a , instr[i].b);
+		fprintf(f, "0b%02x%04x\n",instr[i].a , instr[i].b);
 
 	} else if(strcmp(instr[i].operation, "JMP") == 0){
-		fprintf(f, "instr_mem(%d)<=x\"0c%02x%04x\";\n",i,instr[i].a , instr[i].b);
+		fprintf(f, "0c%02x%04x\n",instr[i].a , instr[i].b);
 
 	} else if(strcmp(instr[i].operation, "JMPC") == 0){
-		fprintf(f, "instr_mem(%d)<=x\"0d%02x%04x\";\n",i,instr[i].a , instr[i].b);
+		fprintf(f, "0d%02x%04x\n",instr[i].a , instr[i].b);
 
 	} else if(strcmp(instr[i].operation, "CALL") == 0){	
-		fprintf(f, "instr_mem(%d)<=x\"0e%02x%04x\";\n",i,instr[i].a , instr[i].b);
+		fprintf(f, "0e%02x%04x\n",instr[i].a , instr[i].b);
 
 	} else if(strcmp(instr[i].operation, "RET") == 0){	
-		fprintf(f, "instr_mem(%d)<=x\"0f%02x%04x\";\n",i,instr[i].a , instr[i].b);
+		fprintf(f, "0f%02x%04x\n",instr[i].a , instr[i].b);
 	
 	} 
 
@@ -100,7 +99,6 @@ fclose(f);
 
 
 }
-
 
 
 
