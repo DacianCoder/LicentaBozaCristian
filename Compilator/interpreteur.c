@@ -49,7 +49,6 @@ for(int i=0;i<=indexInst;i++){
 
 	} else if(strcmp(instr[i].operation, "STORE") == 0){ 
 		fprintf(f, "04%02x%04x\n",instr[i].a , instr[i].b);
-		printf("04%02x  %04x\n",instr[i].a , instr[i].b);
 	
 	} else if(strcmp(instr[i].operation, "LOAD") == 0){
 		fprintf(f, "05%02x%04x\n",instr[i].a , instr[i].b);
@@ -169,21 +168,18 @@ void instructionExecute(int i){
 		registers[instr[i].a] *= registers[instr[i].b] ;
 
 	} else if(strcmp(instr[i].operation, "DIV") == 0){
+		printf("\n\n\n\n%d ,%d - >  %d,%d\n\n\n",registers[instr[i].a],instr[i].a,registers[instr[i].b],instr[i].b);
 		if( registers[instr[i].b] != 0 ){
-			registers[instr[i].a] /= registers[instr[i].b] ;
+			registers[instr[i].a] =registers[instr[i].b]/ registers[instr[i].a] ;
 		}else{
 			registers[instr[i].a] = 0;
 		}
 
 	} else if(strcmp(instr[i].operation, "STORE") == 0){ 
-		printf("%d   %d ::  %d  %d\n",instr[i].a,registers[instr[i].a],instr[i].b,registers[instr[i].b]);
-
 		memory[registers[instr[i].a]] = registers[instr[i].b];
 
 	} else if(strcmp(instr[i].operation, "LOAD") == 0){ 
-
 		registers[instr[i].a] = memory[registers[instr[i].b]];
-
 
 	} else if(strcmp(instr[i].operation, "AFC") == 0){
 		registers[instr[i].a] = instr[i].b;
@@ -196,15 +192,12 @@ void instructionExecute(int i){
 			registers[instr[i].a] = -1; // not equality
 		}
 
-
-
 	} else if(strcmp(instr[i].operation, "INF") == 0){
 		if(registers[instr[i].a] < registers[instr[i].b]){
 			registers[instr[i].a] = 1;
 		} else{
 			registers[instr[i].a] = -1;
 		}
-
 
 	} else if(strcmp(instr[i].operation, "INFE") == 0){
 		if(registers[instr[i].a] <= registers[instr[i].b]){

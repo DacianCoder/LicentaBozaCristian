@@ -9,8 +9,8 @@ int max(int x,int y){
 
 main() {
 
-	int b=16,c;
-	int a=5,i;
+	int b=7,c;
+	int a=4,i;
 	int g;
 	int max;
 
@@ -26,7 +26,7 @@ main() {
 	c=c+2;
 	g++;
 	}
-	
+	g=b/a;
 	max=max(a,c);
 
 }
