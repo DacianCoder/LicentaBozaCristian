@@ -74,8 +74,8 @@ begin
 	S<= Sadd(15 downto 0) when op=x"00" else -- it shoudl have a default state where it doesn't do anything
 		 Ssub(15 downto 0) when op=x"01" else
 		 Smul(15 downto 0) when op=x"02" else
-		 Sleft when op=x"03" else
-		 Sright when op=x"04"else
+		 Sleft when op=x"04" else
+		 Sright when op=x"05"else
 		 Sequ when op=x"07" else
 		 Sinf when op=x"08" else 
 		 Sinf_eq when op=x"09" else 

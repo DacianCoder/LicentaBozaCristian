@@ -175,7 +175,6 @@ process
 			if(status=0)then -- we have to put it to status =1 for reasigning the value 
 					regSelectorA <=reg(to_integer(unsigned(reg_curr_instr(23 downto 16))));
 					regSelectorB <=reg(to_integer(unsigned(reg_curr_instr(15 downto 0)))); -- maybe 7 downto 0
-					--curr_op<=x"ff";  -- the current operation changes only after the process so it remains to FF when we need it to work
 					status<=status+1;
 					curr_op<=x"03"; 
 				elsif(status=1) then
