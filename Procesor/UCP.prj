@@ -1,3 +1,0 @@
-vhdl work "UAL.vhd"
-verilog work "bram32.v"
-vhdl work "UCP.vhd"
