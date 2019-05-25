@@ -66,11 +66,8 @@ char* type;
 
 Main: DeclFunction tMAIN {prof_increment();} tPO tPC Body {} ;
 
-//adding other type to the function
 DeclFunction :vartype tVAR { // hard coded 4 
-			int b=4 + get_latest_inst(); // we don't execute everytime the first 4 instructions
-			
-
+			int b=4 + get_latest_inst(); // always execute function starting from 4th line
 			add_symbol($2, type, 0, get_curr_prof()); 
 			int a= get_last_index(); 
 			queue_instruction("AFC",1,b);
@@ -142,17 +139,20 @@ RetVal : tRETURN tVAR tFINSTR {
 
 Body: tACO Instruction tACC; // add here the get_curr_prof()
 
-Instruction : Instructions Instruction 
-	   | Instructions 
-	   | ;
+Instruction : 
+		Instructions Instruction | 
+		Instructions | 
+		//noInstruction
+		;
 
 Instructions: 
-	   Calcul 
-	 | For 
-     | While
-     | Print
-     | Declaration
-     | If |RetVal;
+		Calcul |
+		For | 
+		While | 
+		Print | 
+		Declaration| 
+		If | 
+		RetVal;
 
 Declaration: vartype Declarations tFINSTR ;
 
@@ -173,8 +173,6 @@ Multideclaration : tVAR tVIRGULE {add_symbol($1, type, 0,get_curr_prof());}
 
 		    queue_instruction("STORE", 14, 1);
 };
-
-
 
 Lastdeclaration: tVAR {add_symbol($1, type, 0, get_curr_prof());}
 		| tVAR tEQUAL tINTNR {
@@ -200,8 +198,6 @@ Print: tPRINTF tPO tVAR tPC tFINSTR {
  		/* queue_instruction("PRT",x,y); is printing value of r[x] and m[y]*/};
 
 
-
-
 If : tIF{prof_increment();} tPO Condition tPC{
 		int a = get_last_index(); //condition-index
 
@@ -221,15 +217,10 @@ If : tIF{prof_increment();} tPO Condition tPC{
 	} Else {	
 		edit_instruction($1, "JMP" , get_latest_inst(), 10);
 		delete_all_var(get_curr_prof());
-		prof_decrement();
-				
-}
+		prof_decrement();};
 
+Else: tELSE Body | // no else
 	;
-
-Else: tELSE Body
-	//| tELSE If
- 	| ;
 
 
 Condition : 	
@@ -332,8 +323,8 @@ Condition :
 //while
 While : tWHILE {
 	prof_increment();
-	$1 = get_latest_inst(); /* Hop to here to retry condition */
-	} tPO Condition tPC {
+	$1 = get_latest_inst(); /* Hop to here to retry condition */}
+	tPO Condition tPC {
 
 	int a = get_last_index(); //condition-index after all conditions
 
@@ -343,15 +334,12 @@ While : tWHILE {
 
 	queue_instruction("TMP", 1, 1); //we add the unedited JMPC
 	$3 = get_latest_inst();         
-	delete_symbol();
-
-	} Body {
+	delete_symbol();}
+	Body {
 		queue_instruction("JMP", $1, 1);
 		edit_instruction($3, "JMPC" , get_latest_inst(), 10);
-
 		delete_all_var(get_curr_prof());
 		prof_decrement();
-
 	} 
 
 ; 
@@ -426,18 +414,7 @@ For: 	tFOR tPO {
 
 DeclCalc : Declaration |Calcul;
 
-
-
-
-
-
-
-
-
-
-
-
- Calcul:  // we always have the result in the last temp variable
+Calcul:  // we always have the result in the last temp variable
 	 	  tVAR tEQUAL Expression tFINSTR {
 				 int a = find_symbol($1, get_curr_prof());
 				 int b = get_last_index();
@@ -457,8 +434,8 @@ DeclCalc : Declaration |Calcul;
 				 int a = find_symbol($1, get_curr_prof());
 				 int b = get_last_index();
 
-				queue_instruction("AFC",14,b);
-				queue_instruction("ADD",14,15);
+				 queue_instruction("AFC",14,b);
+				 queue_instruction("ADD",14,15);
 				 queue_instruction("LOAD", 1, 14);
 				 queue_instruction("AFC", 2, -1);
 				 queue_instruction("MUL", 1, 2);
@@ -469,53 +446,53 @@ DeclCalc : Declaration |Calcul;
 				 delete_symbol();} 
 
 		| tVAR tPLUSPLUS tFINSTR {
-				 int a = find_symbol($1, get_curr_prof());
+				int a = find_symbol($1, get_curr_prof());
 
-				 queue_instruction("AFC",14,a);
-			 	 queue_instruction("ADD",14,15);
-				 queue_instruction("LOAD", 1, 14);
+				queue_instruction("AFC",14,a);
+			 	queue_instruction("ADD",14,15);
+				queue_instruction("LOAD", 1, 14);
 
-				 queue_instruction("AFC", 2, 1);
-				 queue_instruction("ADD", 1, 2);
+				queue_instruction("AFC", 2, 1);
+				queue_instruction("ADD", 1, 2);
 
-				 queue_instruction("STORE", 14, 1);}
+				queue_instruction("STORE", 14, 1);}
 
 		| tVAR tMINUSMINUS tFINSTR {
-				 int a = find_symbol($1, get_curr_prof());
-				 queue_instruction("AFC",14,a);
-				 queue_instruction("ADD",14,15);
-				 queue_instruction("LOAD", 1, 14);
+				int a = find_symbol($1, get_curr_prof());
+				queue_instruction("AFC",14,a);
+				queue_instruction("ADD",14,15);
+				queue_instruction("LOAD", 1, 14);
 
-				 queue_instruction("AFC", 2, 1);
-				 queue_instruction("SUB", 1, 2);
+				queue_instruction("AFC", 2, 1);
+				queue_instruction("SUB", 1, 2);
 
-				 queue_instruction("STORE", 14, 1);}
+				queue_instruction("STORE", 14, 1);}
 
 		| tVAR tMINUSEQUAL Expression tFINSTR {
-				 int a = find_symbol($1, get_curr_prof());
-				 int b = get_last_index();
+				int a = find_symbol($1, get_curr_prof());
+				int b = get_last_index();
 
-				 queue_instruction("AFC",14,a);
-				 queue_instruction("ADD",14,15);
-				 queue_instruction("LOAD", 1, 14);
+				queue_instruction("AFC",14,a);
+				queue_instruction("ADD",14,15);
+				queue_instruction("LOAD", 1, 14);
 
-				 queue_instruction("AFC",14,b);
-				 queue_instruction("ADD",14,15);
-				 queue_instruction("LOAD", 2, 14);
+				queue_instruction("AFC",14,b);
+				queue_instruction("ADD",14,15);
+				queue_instruction("LOAD", 2, 14);
 
-				 queue_instruction("SUB", 1, 2);
+				queue_instruction("SUB", 1, 2);
 
-				 queue_instruction("AFC",14,a);
-				 queue_instruction("ADD",14,15);
-				 queue_instruction("STORE", 14, 1);
-				 delete_symbol();}
+				queue_instruction("AFC",14,a);
+				queue_instruction("ADD",14,15);
+				queue_instruction("STORE", 14, 1);
+				delete_symbol();}
 
 		| tVAR tPLUSEQUAL Expression tFINSTR{
 				 int a = find_symbol($1, get_curr_prof());
 				 int b = get_last_index();
 
 				queue_instruction("AFC",14,a);
-				queue_instruction("ADD",14,15);
+				 queue_instruction("ADD",14,15);
 				 queue_instruction("LOAD", 1, 14);
 
 				queue_instruction("AFC",14,b);
@@ -527,42 +504,40 @@ DeclCalc : Declaration |Calcul;
 				queue_instruction("AFC",14,a);
 				queue_instruction("ADD",14,15);
 				 queue_instruction("STORE", 14, 1);
-				 delete_symbol();}
-;
-
+				 delete_symbol();};
 
 Expression :
  	     Expression tADD Expression {
-				 int a = get_last_index();
-				 int b = a-1;
+				int a = get_last_index();
+				int b = a-1;
 
 				queue_instruction("AFC",14,a);
 				queue_instruction("ADD",14,15);
-				 queue_instruction("LOAD", 1, 14);
+				queue_instruction("LOAD", 1, 14);
 
 				queue_instruction("AFC",14,b);
 				queue_instruction("ADD",14,15);
-				 queue_instruction("LOAD", 2, 14);
+				queue_instruction("LOAD", 2, 14);
 
-				 queue_instruction("ADD", 1, 2);
-			     queue_instruction("STORE", 14, 1);
-				 delete_symbol(); }	  
+				queue_instruction("ADD", 1, 2);
+		     		queue_instruction("STORE", 14, 1);
+				delete_symbol(); }	  
 
 		| Expression tSUBTRACT Expression {
-				 int a = get_last_index();
-			 	 int b = a-1;
+				int a = get_last_index();
+			 	int b = a-1;
 
 				queue_instruction("AFC",14,a);
 				queue_instruction("ADD",14,15);
-				 queue_instruction("LOAD", 1, 14);
+				queue_instruction("LOAD", 1, 14);
 
 				queue_instruction("AFC",14,b);
 				queue_instruction("ADD",14,15);
-			 	 queue_instruction("LOAD", 2, 14);
+			 	queue_instruction("LOAD", 2, 14);
 
-				 queue_instruction("SUB", 1, 2);
-				 queue_instruction("STORE", 14, 1);
-			 	 delete_symbol(); }
+				queue_instruction("SUB", 1, 2);
+				queue_instruction("STORE", 14, 1);
+			 	delete_symbol(); }
 
  		| Expression tDIVIDE Expression {
 				 int a = get_last_index();
@@ -633,30 +608,20 @@ Expression :
 				queue_instruction("ADD",14,15);
 				queue_instruction("STORE", 14, 1); }
 
-		| tPO Expression tPC
-
-
-			;
-
+		| tPO Expression tPC;
 
 Function : tVAR tPO{
-				int z = get_last_index();
-				queue_instruction("AFC",15,z);
-			
-		prof_increment();
-		} 
-
+			int z = get_last_index();
+			queue_instruction("AFC",15,z);
+			prof_increment();} 
 	Params tPC {
 		int a= get_latest_inst() +1;
-		int b=find_symbol($1,0);// the var NameFUNC has stored the index needed for function CALL
+		int b=find_symbol($1,0);// the var NameFUNC stores the start instr address
 		queue_instruction("CALL",b,a);};
 
 %%
 
-
 void yyerror(char *s) {
-	//printf("da-te ba ca cade%d",yylloc.first_line);
-	//printf("da-te ba ca cade%d",yylineno);
 	fprintf(stderr, "error: %s\n", s);
 	exit(1);
 }
@@ -674,14 +639,20 @@ int main() {
 	printf("\n\n                   Instructions ready          \n\n\n");
 	printf("\n\n----------------------------------------------------------  \n\n");
 	printf("\n\n                   Starting execution           \n\n\n");
+	printf("\n\n----------------------------------------------------------  \n\n");
 	execute_all_instructions();
 	printHexInstr();
 
 	print_table();
 
-	for(int i=0; i<=get_last_index(); i++){
+	printf("\n\n----------------------------------------------------------  \n\n");
+	char* varName;
 
-		printf("var: %s, value: %d\n", get_variable_name(i), get_memory_value(i));
+	for(int i=0; i<=get_last_index(); i++){
+		varName=get_variable_name(i);
+		if(varName!=NULL){
+			printf("var: %s --> %d\n", varName, get_memory_value(i));
+		}
 	}
 	
 }

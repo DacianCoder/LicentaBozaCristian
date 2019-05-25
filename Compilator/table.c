@@ -88,7 +88,10 @@ entry* current = tab_symbols;
 char* get_variable_name(int tableIndex){
    	entry* current = tab_symbols;
 	for(int i = 0; i<global_id-tableIndex-1; i++){
-	current = current->next;
+		current = current->next;
+	}
+	if(current->profondeur==NULL){
+		return NULL;
 	}
 	return current->name;
 }
@@ -213,7 +216,7 @@ void print_table(){ //possibly add table as in param
   entry* temporaryTable = tab_symbols;
   printf("| ID name type init prof|\n");
   while(temporaryTable != NULL){
-    printf("\n| %d %s %s %d %d |\n", temporaryTable->id, temporaryTable->name, temporaryTable->type, temporaryTable->initialise, temporaryTable->profondeur);
+    printf("\n| %d   %s   %s  %d  %d |\n", temporaryTable->id, temporaryTable->name, temporaryTable->type, temporaryTable->initialise, temporaryTable->profondeur);
     temporaryTable = temporaryTable->next;
   } 
 

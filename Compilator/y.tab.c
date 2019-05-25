@@ -512,15 +512,15 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,    67,    67,    67,    70,    70,    87,    90,    91,    95,
-      95,    97,    99,   115,   119,   119,   121,   122,   123,   127,
-     143,   145,   146,   147,   150,   151,   152,   153,   154,   155,
-     155,   157,   160,   161,   163,   164,   179,   180,   194,   195,
-     198,   205,   205,   216,   205,   230,   232,   237,   257,   275,
-     293,   310,   333,   336,   333,   359,   361,   364,   370,   359,
-     393,   395,   397,   403,   393,   427,   427,   441,   456,   471,
-     483,   494,   513,   535,   551,   567,   583,   598,   610,   618,
-     625,   636,   642,   642
+       0,    67,    67,    67,    69,    69,    84,    87,    88,    92,
+      92,    94,    96,   112,   116,   116,   118,   119,   120,   124,
+     140,   143,   144,   144,   149,   150,   151,   152,   153,   154,
+     155,   157,   160,   161,   163,   164,   177,   178,   192,   193,
+     196,   201,   201,   212,   201,   222,   222,   228,   248,   266,
+     284,   301,   324,   327,   324,   347,   349,   352,   358,   347,
+     381,   383,   385,   391,   381,   415,   415,   418,   433,   448,
+     460,   471,   490,   510,   526,   542,   558,   573,   585,   593,
+     600,   611,   613,   613
 };
 #endif
 
@@ -1413,11 +1413,9 @@ yyreduce:
     break;
 
   case 4:
-#line 70 "rule.y" /* yacc.c:1646  */
+#line 69 "rule.y" /* yacc.c:1646  */
     { // hard coded 4 
-			int b=4 + get_latest_inst(); // we don't execute everytime the first 4 instructions
-			
-
+			int b=4 + get_latest_inst(); // always execute function starting from 4th line
 			add_symbol((yyvsp[0].str), type, 0, get_curr_prof()); 
 			int a= get_last_index(); 
 			queue_instruction("AFC",1,b);
@@ -1427,32 +1425,32 @@ yyreduce:
 			queue_instruction("STORE",14,1);// we store at @14 the val b 
 
 			queue_instruction("TMPJMP",1,1); }
-#line 1431 "y.tab.c" /* yacc.c:1646  */
+#line 1429 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 5:
-#line 84 "rule.y" /* yacc.c:1646  */
+#line 81 "rule.y" /* yacc.c:1646  */
     {
 			edit_instruction(4,"JMP",get_latest_inst(),0);}
-#line 1438 "y.tab.c" /* yacc.c:1646  */
+#line 1436 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 91 "rule.y" /* yacc.c:1646  */
+#line 88 "rule.y" /* yacc.c:1646  */
     { // if there is no parameter we need to add a temp variable in wich we store the result 
 		add_temporary_symbol();}
-#line 1445 "y.tab.c" /* yacc.c:1646  */
+#line 1443 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 97 "rule.y" /* yacc.c:1646  */
+#line 94 "rule.y" /* yacc.c:1646  */
     { 
 			add_symbol((yyvsp[0].str), type, 0, get_curr_prof()); }
-#line 1452 "y.tab.c" /* yacc.c:1646  */
+#line 1450 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 99 "rule.y" /* yacc.c:1646  */
+#line 96 "rule.y" /* yacc.c:1646  */
     {	
 			int a= find_symbol((yyvsp[0].str), get_curr_prof()); 
 			add_symbol((yyvsp[0].str), type, 0, get_curr_prof());
@@ -1466,11 +1464,11 @@ yyreduce:
 
 			queue_instruction("STORE", 14, 1); 
 }
-#line 1470 "y.tab.c" /* yacc.c:1646  */
+#line 1468 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 19:
-#line 127 "rule.y" /* yacc.c:1646  */
+#line 124 "rule.y" /* yacc.c:1646  */
     { 
 					int a=find_func_symbol((yyvsp[-1].str), 0);// we know the delta now
 				
@@ -1484,13 +1482,13 @@ yyreduce:
 					queue_instruction("STORE",14,1); // we store it at the correct @adr
 					queue_instruction("RET",1,1);
 }
-#line 1488 "y.tab.c" /* yacc.c:1646  */
+#line 1486 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 34:
 #line 163 "rule.y" /* yacc.c:1646  */
     {add_symbol((yyvsp[-1].str), type, 0,get_curr_prof());}
-#line 1494 "y.tab.c" /* yacc.c:1646  */
+#line 1492 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 35:
@@ -1507,17 +1505,17 @@ yyreduce:
 
 		    queue_instruction("STORE", 14, 1);
 }
-#line 1511 "y.tab.c" /* yacc.c:1646  */
+#line 1509 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 36:
-#line 179 "rule.y" /* yacc.c:1646  */
+#line 177 "rule.y" /* yacc.c:1646  */
     {add_symbol((yyvsp[0].str), type, 0, get_curr_prof());}
-#line 1517 "y.tab.c" /* yacc.c:1646  */
+#line 1515 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 37:
-#line 180 "rule.y" /* yacc.c:1646  */
+#line 178 "rule.y" /* yacc.c:1646  */
     {
 
 				 add_symbol((yyvsp[-2].str), type, 0, get_curr_prof()); 
@@ -1530,37 +1528,37 @@ yyreduce:
 
 				 queue_instruction("STORE", 14, 1);  
 }
-#line 1534 "y.tab.c" /* yacc.c:1646  */
+#line 1532 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 38:
-#line 194 "rule.y" /* yacc.c:1646  */
+#line 192 "rule.y" /* yacc.c:1646  */
     { type = "int"; }
-#line 1540 "y.tab.c" /* yacc.c:1646  */
+#line 1538 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 39:
-#line 195 "rule.y" /* yacc.c:1646  */
+#line 193 "rule.y" /* yacc.c:1646  */
     { type = "const"; }
-#line 1546 "y.tab.c" /* yacc.c:1646  */
+#line 1544 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 40:
-#line 198 "rule.y" /* yacc.c:1646  */
+#line 196 "rule.y" /* yacc.c:1646  */
     {
 			printf("Print not supported\n"); 
  		/* queue_instruction("PRT",x,y); is printing value of r[x] and m[y]*/}
-#line 1554 "y.tab.c" /* yacc.c:1646  */
+#line 1552 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 41:
-#line 205 "rule.y" /* yacc.c:1646  */
+#line 201 "rule.y" /* yacc.c:1646  */
     {prof_increment();}
-#line 1560 "y.tab.c" /* yacc.c:1646  */
+#line 1558 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 42:
-#line 205 "rule.y" /* yacc.c:1646  */
+#line 201 "rule.y" /* yacc.c:1646  */
     {
 		int a = get_last_index(); //condition-index
 
@@ -1573,33 +1571,31 @@ yyreduce:
 		delete_symbol();
 		
 	}
-#line 1577 "y.tab.c" /* yacc.c:1646  */
+#line 1575 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 43:
-#line 216 "rule.y" /* yacc.c:1646  */
+#line 212 "rule.y" /* yacc.c:1646  */
     {
 		queue_instruction("TMP", 1, 1);
 		edit_instruction((yyvsp[-6].nb), "JMPC" , get_latest_inst(), 10);
 		(yyvsp[-6].nb) = get_latest_inst();
 		
 	}
-#line 1588 "y.tab.c" /* yacc.c:1646  */
+#line 1586 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 44:
-#line 221 "rule.y" /* yacc.c:1646  */
+#line 217 "rule.y" /* yacc.c:1646  */
     {	
 		edit_instruction((yyvsp[-8].nb), "JMP" , get_latest_inst(), 10);
 		delete_all_var(get_curr_prof());
-		prof_decrement();
-				
-}
-#line 1599 "y.tab.c" /* yacc.c:1646  */
+		prof_decrement();}
+#line 1595 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 47:
-#line 237 "rule.y" /* yacc.c:1646  */
+#line 228 "rule.y" /* yacc.c:1646  */
     {
 
 		int a = get_last_index();
@@ -1620,11 +1616,11 @@ yyreduce:
 		queue_instruction("STORE", 14, 2);
 		delete_symbol();
 	}
-#line 1624 "y.tab.c" /* yacc.c:1646  */
+#line 1620 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 48:
-#line 257 "rule.y" /* yacc.c:1646  */
+#line 248 "rule.y" /* yacc.c:1646  */
     {
 		int a = get_last_index();
 		int b = a-1;
@@ -1643,11 +1639,11 @@ yyreduce:
 		queue_instruction("STORE", 14, 2);
 		delete_symbol();
 	}
-#line 1647 "y.tab.c" /* yacc.c:1646  */
+#line 1643 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 49:
-#line 275 "rule.y" /* yacc.c:1646  */
+#line 266 "rule.y" /* yacc.c:1646  */
     {
 		int a = get_last_index();
 		int b = a-1;
@@ -1666,11 +1662,11 @@ yyreduce:
 		queue_instruction("STORE", 14, 2);
 		delete_symbol();
 	}
-#line 1670 "y.tab.c" /* yacc.c:1646  */
+#line 1666 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 50:
-#line 293 "rule.y" /* yacc.c:1646  */
+#line 284 "rule.y" /* yacc.c:1646  */
     {
 		int a = get_last_index();
 		int b = a-1;
@@ -1688,11 +1684,11 @@ yyreduce:
 		queue_instruction("STORE", 14, 2);
 		delete_symbol();
 	}
-#line 1692 "y.tab.c" /* yacc.c:1646  */
+#line 1688 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 51:
-#line 310 "rule.y" /* yacc.c:1646  */
+#line 301 "rule.y" /* yacc.c:1646  */
     {
 		int a = get_last_index(); // right arg
 		int b = a-1;			// left arg
@@ -1711,20 +1707,19 @@ yyreduce:
 		queue_instruction("STORE", 14, 2);
 		delete_symbol();
 	}
-#line 1715 "y.tab.c" /* yacc.c:1646  */
+#line 1711 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 52:
-#line 333 "rule.y" /* yacc.c:1646  */
+#line 324 "rule.y" /* yacc.c:1646  */
     {
 	prof_increment();
-	(yyvsp[0].nb) = get_latest_inst(); /* Hop to here to retry condition */
-	}
-#line 1724 "y.tab.c" /* yacc.c:1646  */
+	(yyvsp[0].nb) = get_latest_inst(); /* Hop to here to retry condition */}
+#line 1719 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 53:
-#line 336 "rule.y" /* yacc.c:1646  */
+#line 327 "rule.y" /* yacc.c:1646  */
     {
 
 	int a = get_last_index(); //condition-index after all conditions
@@ -1735,61 +1730,57 @@ yyreduce:
 
 	queue_instruction("TMP", 1, 1); //we add the unedited JMPC
 	(yyvsp[-2].nb) = get_latest_inst();         
-	delete_symbol();
-
-	}
-#line 1742 "y.tab.c" /* yacc.c:1646  */
+	delete_symbol();}
+#line 1735 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 54:
-#line 348 "rule.y" /* yacc.c:1646  */
+#line 338 "rule.y" /* yacc.c:1646  */
     {
 		queue_instruction("JMP", (yyvsp[-6].nb), 1);
 		edit_instruction((yyvsp[-4].nb), "JMPC" , get_latest_inst(), 10);
-
 		delete_all_var(get_curr_prof());
 		prof_decrement();
-
 	}
-#line 1755 "y.tab.c" /* yacc.c:1646  */
+#line 1746 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 55:
-#line 359 "rule.y" /* yacc.c:1646  */
+#line 347 "rule.y" /* yacc.c:1646  */
     {
 			prof_increment();}
-#line 1762 "y.tab.c" /* yacc.c:1646  */
+#line 1753 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 56:
-#line 361 "rule.y" /* yacc.c:1646  */
+#line 349 "rule.y" /* yacc.c:1646  */
     {
 		    	(yyvsp[-3].nb) = get_latest_inst();}
-#line 1769 "y.tab.c" /* yacc.c:1646  */
+#line 1760 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 57:
-#line 364 "rule.y" /* yacc.c:1646  */
+#line 352 "rule.y" /* yacc.c:1646  */
     {
 	   		int a = get_last_index(); //condition-index after all conditions
 			queue_instruction("AFC",14,a);
 			queue_instruction("ADD",14,15);
 			queue_instruction("LOAD", 10, 14);}
-#line 1779 "y.tab.c" /* yacc.c:1646  */
+#line 1770 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 58:
-#line 370 "rule.y" /* yacc.c:1646  */
+#line 358 "rule.y" /* yacc.c:1646  */
     {
 			(yyvsp[-9].nb)= find_symbol((yyvsp[-2].str), get_curr_prof());
 			queue_instruction("TMP", 1, 1); //we add the unedited JMPC 
 			(yyvsp[-4].nb) = get_latest_inst();         
 			delete_symbol();}
-#line 1789 "y.tab.c" /* yacc.c:1646  */
+#line 1780 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 59:
-#line 375 "rule.y" /* yacc.c:1646  */
+#line 363 "rule.y" /* yacc.c:1646  */
     {	
 			//we add here the code for incrementing but targeting the variable that has to be targeted
 			queue_instruction("AFC",14,(yyvsp[-11].nb));
@@ -1806,46 +1797,46 @@ yyreduce:
 
 			delete_all_var(get_curr_prof());
 			prof_decrement();}
-#line 1810 "y.tab.c" /* yacc.c:1646  */
+#line 1801 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 60:
-#line 393 "rule.y" /* yacc.c:1646  */
+#line 381 "rule.y" /* yacc.c:1646  */
     {
 			prof_increment();}
-#line 1817 "y.tab.c" /* yacc.c:1646  */
+#line 1808 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 61:
-#line 395 "rule.y" /* yacc.c:1646  */
+#line 383 "rule.y" /* yacc.c:1646  */
     {
 		        (yyvsp[-3].nb) = get_latest_inst();}
-#line 1824 "y.tab.c" /* yacc.c:1646  */
+#line 1815 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 62:
-#line 397 "rule.y" /* yacc.c:1646  */
+#line 385 "rule.y" /* yacc.c:1646  */
     {
 	   		int a = get_last_index(); //condition-index after all conditions
 
 			queue_instruction("AFC",14,a);
 			queue_instruction("ADD",14,15);
 			queue_instruction("LOAD", 10, 14);}
-#line 1835 "y.tab.c" /* yacc.c:1646  */
+#line 1826 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 63:
-#line 403 "rule.y" /* yacc.c:1646  */
+#line 391 "rule.y" /* yacc.c:1646  */
     {
 			(yyvsp[-9].nb)= find_symbol((yyvsp[-2].str), get_curr_prof());
 			queue_instruction("TMP", 1, 1); //we add the unedited JMPC 
 			(yyvsp[-4].nb) = get_latest_inst();         
 			delete_symbol();}
-#line 1845 "y.tab.c" /* yacc.c:1646  */
+#line 1836 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 64:
-#line 408 "rule.y" /* yacc.c:1646  */
+#line 396 "rule.y" /* yacc.c:1646  */
     {
 	
 			queue_instruction("AFC",14,(yyvsp[-11].nb)); // we store in r14 value of $2
@@ -1863,11 +1854,11 @@ yyreduce:
 
 			delete_all_var(get_curr_prof());
 			prof_decrement(); }
-#line 1867 "y.tab.c" /* yacc.c:1646  */
+#line 1858 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 67:
-#line 441 "rule.y" /* yacc.c:1646  */
+#line 418 "rule.y" /* yacc.c:1646  */
     {
 				 int a = find_symbol((yyvsp[-3].str), get_curr_prof());
 				 int b = get_last_index();
@@ -1882,17 +1873,17 @@ yyreduce:
 				 queue_instruction("STORE", 14, 1);
 
 				 delete_symbol();}
-#line 1886 "y.tab.c" /* yacc.c:1646  */
+#line 1877 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 68:
-#line 456 "rule.y" /* yacc.c:1646  */
+#line 433 "rule.y" /* yacc.c:1646  */
     {
 				 int a = find_symbol((yyvsp[-4].str), get_curr_prof());
 				 int b = get_last_index();
 
-				queue_instruction("AFC",14,b);
-				queue_instruction("ADD",14,15);
+				 queue_instruction("AFC",14,b);
+				 queue_instruction("ADD",14,15);
 				 queue_instruction("LOAD", 1, 14);
 				 queue_instruction("AFC", 2, -1);
 				 queue_instruction("MUL", 1, 2);
@@ -1901,71 +1892,71 @@ yyreduce:
 			 	 queue_instruction("ADD",14,15);
 				 queue_instruction("STORE", 14, 1);
 				 delete_symbol();}
-#line 1905 "y.tab.c" /* yacc.c:1646  */
+#line 1896 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 69:
-#line 471 "rule.y" /* yacc.c:1646  */
+#line 448 "rule.y" /* yacc.c:1646  */
     {
-				 int a = find_symbol((yyvsp[-2].str), get_curr_prof());
+				int a = find_symbol((yyvsp[-2].str), get_curr_prof());
 
-				 queue_instruction("AFC",14,a);
-			 	 queue_instruction("ADD",14,15);
-				 queue_instruction("LOAD", 1, 14);
+				queue_instruction("AFC",14,a);
+			 	queue_instruction("ADD",14,15);
+				queue_instruction("LOAD", 1, 14);
 
-				 queue_instruction("AFC", 2, 1);
-				 queue_instruction("ADD", 1, 2);
+				queue_instruction("AFC", 2, 1);
+				queue_instruction("ADD", 1, 2);
 
-				 queue_instruction("STORE", 14, 1);}
-#line 1921 "y.tab.c" /* yacc.c:1646  */
+				queue_instruction("STORE", 14, 1);}
+#line 1912 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 70:
-#line 483 "rule.y" /* yacc.c:1646  */
+#line 460 "rule.y" /* yacc.c:1646  */
     {
-				 int a = find_symbol((yyvsp[-2].str), get_curr_prof());
-				 queue_instruction("AFC",14,a);
-				 queue_instruction("ADD",14,15);
-				 queue_instruction("LOAD", 1, 14);
+				int a = find_symbol((yyvsp[-2].str), get_curr_prof());
+				queue_instruction("AFC",14,a);
+				queue_instruction("ADD",14,15);
+				queue_instruction("LOAD", 1, 14);
 
-				 queue_instruction("AFC", 2, 1);
-				 queue_instruction("SUB", 1, 2);
+				queue_instruction("AFC", 2, 1);
+				queue_instruction("SUB", 1, 2);
 
-				 queue_instruction("STORE", 14, 1);}
-#line 1936 "y.tab.c" /* yacc.c:1646  */
+				queue_instruction("STORE", 14, 1);}
+#line 1927 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 71:
-#line 494 "rule.y" /* yacc.c:1646  */
+#line 471 "rule.y" /* yacc.c:1646  */
     {
-				 int a = find_symbol((yyvsp[-3].str), get_curr_prof());
-				 int b = get_last_index();
+				int a = find_symbol((yyvsp[-3].str), get_curr_prof());
+				int b = get_last_index();
 
-				 queue_instruction("AFC",14,a);
-				 queue_instruction("ADD",14,15);
-				 queue_instruction("LOAD", 1, 14);
+				queue_instruction("AFC",14,a);
+				queue_instruction("ADD",14,15);
+				queue_instruction("LOAD", 1, 14);
 
-				 queue_instruction("AFC",14,b);
-				 queue_instruction("ADD",14,15);
-				 queue_instruction("LOAD", 2, 14);
+				queue_instruction("AFC",14,b);
+				queue_instruction("ADD",14,15);
+				queue_instruction("LOAD", 2, 14);
 
-				 queue_instruction("SUB", 1, 2);
+				queue_instruction("SUB", 1, 2);
 
-				 queue_instruction("AFC",14,a);
-				 queue_instruction("ADD",14,15);
-				 queue_instruction("STORE", 14, 1);
-				 delete_symbol();}
-#line 1959 "y.tab.c" /* yacc.c:1646  */
+				queue_instruction("AFC",14,a);
+				queue_instruction("ADD",14,15);
+				queue_instruction("STORE", 14, 1);
+				delete_symbol();}
+#line 1950 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 72:
-#line 513 "rule.y" /* yacc.c:1646  */
+#line 490 "rule.y" /* yacc.c:1646  */
     {
 				 int a = find_symbol((yyvsp[-3].str), get_curr_prof());
 				 int b = get_last_index();
 
 				queue_instruction("AFC",14,a);
-				queue_instruction("ADD",14,15);
+				 queue_instruction("ADD",14,15);
 				 queue_instruction("LOAD", 1, 14);
 
 				queue_instruction("AFC",14,b);
@@ -1978,51 +1969,51 @@ yyreduce:
 				queue_instruction("ADD",14,15);
 				 queue_instruction("STORE", 14, 1);
 				 delete_symbol();}
-#line 1982 "y.tab.c" /* yacc.c:1646  */
+#line 1973 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 73:
-#line 535 "rule.y" /* yacc.c:1646  */
+#line 510 "rule.y" /* yacc.c:1646  */
     {
-				 int a = get_last_index();
-				 int b = a-1;
+				int a = get_last_index();
+				int b = a-1;
 
 				queue_instruction("AFC",14,a);
 				queue_instruction("ADD",14,15);
-				 queue_instruction("LOAD", 1, 14);
+				queue_instruction("LOAD", 1, 14);
 
 				queue_instruction("AFC",14,b);
 				queue_instruction("ADD",14,15);
-				 queue_instruction("LOAD", 2, 14);
+				queue_instruction("LOAD", 2, 14);
 
-				 queue_instruction("ADD", 1, 2);
-			     queue_instruction("STORE", 14, 1);
-				 delete_symbol(); }
-#line 2002 "y.tab.c" /* yacc.c:1646  */
+				queue_instruction("ADD", 1, 2);
+		     		queue_instruction("STORE", 14, 1);
+				delete_symbol(); }
+#line 1993 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 74:
-#line 551 "rule.y" /* yacc.c:1646  */
+#line 526 "rule.y" /* yacc.c:1646  */
     {
-				 int a = get_last_index();
-			 	 int b = a-1;
+				int a = get_last_index();
+			 	int b = a-1;
 
 				queue_instruction("AFC",14,a);
 				queue_instruction("ADD",14,15);
-				 queue_instruction("LOAD", 1, 14);
+				queue_instruction("LOAD", 1, 14);
 
 				queue_instruction("AFC",14,b);
 				queue_instruction("ADD",14,15);
-			 	 queue_instruction("LOAD", 2, 14);
+			 	queue_instruction("LOAD", 2, 14);
 
-				 queue_instruction("SUB", 1, 2);
-				 queue_instruction("STORE", 14, 1);
-			 	 delete_symbol(); }
-#line 2022 "y.tab.c" /* yacc.c:1646  */
+				queue_instruction("SUB", 1, 2);
+				queue_instruction("STORE", 14, 1);
+			 	delete_symbol(); }
+#line 2013 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 75:
-#line 567 "rule.y" /* yacc.c:1646  */
+#line 542 "rule.y" /* yacc.c:1646  */
     {
 				 int a = get_last_index();
 				 int b = a-1;
@@ -2038,11 +2029,11 @@ yyreduce:
 				 queue_instruction("DIV", 1, 2);
 				 queue_instruction("STORE", 14, 1);
 				 delete_symbol(); }
-#line 2042 "y.tab.c" /* yacc.c:1646  */
+#line 2033 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 76:
-#line 583 "rule.y" /* yacc.c:1646  */
+#line 558 "rule.y" /* yacc.c:1646  */
     {
 		 		 int a = get_last_index();
 				 int b = a-1;
@@ -2057,11 +2048,11 @@ yyreduce:
 				 queue_instruction("MUL", 1, 2);
 				 queue_instruction("STORE", 14, 1);
 				 delete_symbol(); }
-#line 2061 "y.tab.c" /* yacc.c:1646  */
+#line 2052 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 77:
-#line 598 "rule.y" /* yacc.c:1646  */
+#line 573 "rule.y" /* yacc.c:1646  */
     {
 				add_temporary_symbol();
 				int a=find_symbol((yyvsp[0].str), get_curr_prof());
@@ -2073,11 +2064,11 @@ yyreduce:
 				queue_instruction("AFC",14,b);
 				queue_instruction("ADD",14,15);
 				queue_instruction("STORE", 14, 1); }
-#line 2077 "y.tab.c" /* yacc.c:1646  */
+#line 2068 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 78:
-#line 610 "rule.y" /* yacc.c:1646  */
+#line 585 "rule.y" /* yacc.c:1646  */
     {
 				add_temporary_symbol();
 				int a=get_last_index();
@@ -2086,22 +2077,22 @@ yyreduce:
 				queue_instruction("AFC",14,a);
 				queue_instruction("ADD",14,15);
 				queue_instruction("STORE",14, 1); }
-#line 2090 "y.tab.c" /* yacc.c:1646  */
+#line 2081 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 79:
-#line 618 "rule.y" /* yacc.c:1646  */
+#line 593 "rule.y" /* yacc.c:1646  */
     {
 				
 				queue_instruction("AFC",15,0);
 				delete_symbol();
 				prof_decrement();
 			 }
-#line 2101 "y.tab.c" /* yacc.c:1646  */
+#line 2092 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 80:
-#line 625 "rule.y" /* yacc.c:1646  */
+#line 600 "rule.y" /* yacc.c:1646  */
     {
 				add_temporary_symbol();
 				int a= get_last_index();
@@ -2112,31 +2103,29 @@ yyreduce:
 				queue_instruction("AFC",14,a);
 				queue_instruction("ADD",14,15);
 				queue_instruction("STORE", 14, 1); }
-#line 2116 "y.tab.c" /* yacc.c:1646  */
+#line 2107 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 82:
-#line 642 "rule.y" /* yacc.c:1646  */
+#line 613 "rule.y" /* yacc.c:1646  */
     {
-				int z = get_last_index();
-				queue_instruction("AFC",15,z);
-			
-		prof_increment();
-		}
-#line 2127 "y.tab.c" /* yacc.c:1646  */
+			int z = get_last_index();
+			queue_instruction("AFC",15,z);
+			prof_increment();}
+#line 2116 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 83:
-#line 649 "rule.y" /* yacc.c:1646  */
+#line 617 "rule.y" /* yacc.c:1646  */
     {
 		int a= get_latest_inst() +1;
-		int b=find_symbol((yyvsp[-4].str),0);// the var NameFUNC has stored the index needed for function CALL
+		int b=find_symbol((yyvsp[-4].str),0);// the var NameFUNC stores the start instr address
 		queue_instruction("CALL",b,a);}
-#line 2136 "y.tab.c" /* yacc.c:1646  */
+#line 2125 "y.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 2140 "y.tab.c" /* yacc.c:1646  */
+#line 2129 "y.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2364,13 +2353,10 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 654 "rule.y" /* yacc.c:1906  */
-
+#line 622 "rule.y" /* yacc.c:1906  */
 
 
 void yyerror(char *s) {
-	//printf("da-te ba ca cade%d",yylloc.first_line);
-	//printf("da-te ba ca cade%d",yylineno);
 	fprintf(stderr, "error: %s\n", s);
 	exit(1);
 }
@@ -2388,14 +2374,20 @@ int main() {
 	printf("\n\n                   Instructions ready          \n\n\n");
 	printf("\n\n----------------------------------------------------------  \n\n");
 	printf("\n\n                   Starting execution           \n\n\n");
+	printf("\n\n----------------------------------------------------------  \n\n");
 	execute_all_instructions();
 	printHexInstr();
 
 	print_table();
 
-	for(int i=0; i<=get_last_index(); i++){
+	printf("\n\n----------------------------------------------------------  \n\n");
+	char* varName;
 
-		printf("var: %s, value: %d\n", get_variable_name(i), get_memory_value(i));
+	for(int i=0; i<=get_last_index(); i++){
+		varName=get_variable_name(i);
+		if(varName!=NULL){
+			printf("var: %s --> %d\n", varName, get_memory_value(i));
+		}
 	}
 	
 }

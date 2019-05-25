@@ -1,32 +1,30 @@
-int max(int x,int y){
-	daca(x>=y){
-		intoarce x; 
-	}altfel{
-		intoarce y;
-	}
+	int max(int x,int y){
+		daca(x>=y){
+			intoarce x; 
+		}altfel{
+			intoarce y;
+		}
 
-};
+	};
 
-main() {
+	main() {
+		int b=21,c;
+		int a=4,i;
+		int g;
+		int rez;
 
-	int b=7,c;
-	int a=4,i;
-	int g;
-	int max;
-
-	daca(c==1){	
-		i=10;
-	}altfel {
-		i=2;
-	}
-	 
-	a=a+i+1;
+		daca(c==1){	
+			i=10;
+		}altfel {
+			i=2;
+		}
+		 
+		a=a+i+1;
 	
-	catTimp(g<b){
-	c=c+2;
-	g++;
+		catTimp(g<b){
+			c=c+2;
+			g++;
+		}
+		g=b*a;
+		rez=max(a,c);
 	}
-	g=b/a;
-	max=max(a,c);
-
-}
