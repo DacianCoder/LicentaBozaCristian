@@ -105,7 +105,6 @@ fclose(f);
 void printAllInst(){
 	int i=0;
 	while(i<indexInst){
-		printf("%d  -> ",i);
 		printInst(i);
 		i++;
 	}	
@@ -168,7 +167,6 @@ void instructionExecute(int i){
 		registers[instr[i].a] *= registers[instr[i].b] ;
 
 	} else if(strcmp(instr[i].operation, "DIV") == 0){
-		printf("\n\n\n\n%d ,%d - >  %d,%d\n\n\n",registers[instr[i].a],instr[i].a,registers[instr[i].b],instr[i].b);
 		if( registers[instr[i].b] != 0 ){
 			registers[instr[i].a] =registers[instr[i].b]/ registers[instr[i].a] ;
 		}else{
