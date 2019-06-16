@@ -428,15 +428,6 @@ DeclCalc : Declaration |Calcul;
 
 
 
-
-
-
-
-
-
-
-
-
  Calcul:  // we always have the result in the last temp variable
 	 	  tVAR tEQUAL Expression tFINSTR {
 				 int a = find_symbol($1, get_curr_prof());

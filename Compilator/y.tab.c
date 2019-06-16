@@ -518,9 +518,9 @@ static const yytype_uint16 yyrline[] =
      155,   157,   160,   161,   163,   164,   179,   180,   194,   195,
      198,   205,   205,   216,   205,   230,   232,   237,   257,   275,
      293,   310,   333,   336,   333,   359,   361,   364,   370,   359,
-     393,   395,   397,   403,   393,   427,   427,   441,   456,   471,
-     483,   494,   513,   535,   551,   567,   583,   598,   610,   618,
-     625,   636,   642,   642
+     393,   395,   397,   403,   393,   427,   427,   432,   447,   462,
+     474,   485,   504,   526,   542,   558,   574,   589,   601,   609,
+     616,   627,   633,   633
 };
 #endif
 
@@ -1867,7 +1867,7 @@ yyreduce:
     break;
 
   case 67:
-#line 441 "rule.y" /* yacc.c:1646  */
+#line 432 "rule.y" /* yacc.c:1646  */
     {
 				 int a = find_symbol((yyvsp[-3].str), get_curr_prof());
 				 int b = get_last_index();
@@ -1886,7 +1886,7 @@ yyreduce:
     break;
 
   case 68:
-#line 456 "rule.y" /* yacc.c:1646  */
+#line 447 "rule.y" /* yacc.c:1646  */
     {
 				 int a = find_symbol((yyvsp[-4].str), get_curr_prof());
 				 int b = get_last_index();
@@ -1905,7 +1905,7 @@ yyreduce:
     break;
 
   case 69:
-#line 471 "rule.y" /* yacc.c:1646  */
+#line 462 "rule.y" /* yacc.c:1646  */
     {
 				 int a = find_symbol((yyvsp[-2].str), get_curr_prof());
 
@@ -1921,7 +1921,7 @@ yyreduce:
     break;
 
   case 70:
-#line 483 "rule.y" /* yacc.c:1646  */
+#line 474 "rule.y" /* yacc.c:1646  */
     {
 				 int a = find_symbol((yyvsp[-2].str), get_curr_prof());
 				 queue_instruction("AFC",14,a);
@@ -1936,7 +1936,7 @@ yyreduce:
     break;
 
   case 71:
-#line 494 "rule.y" /* yacc.c:1646  */
+#line 485 "rule.y" /* yacc.c:1646  */
     {
 				 int a = find_symbol((yyvsp[-3].str), get_curr_prof());
 				 int b = get_last_index();
@@ -1959,7 +1959,7 @@ yyreduce:
     break;
 
   case 72:
-#line 513 "rule.y" /* yacc.c:1646  */
+#line 504 "rule.y" /* yacc.c:1646  */
     {
 				 int a = find_symbol((yyvsp[-3].str), get_curr_prof());
 				 int b = get_last_index();
@@ -1982,7 +1982,7 @@ yyreduce:
     break;
 
   case 73:
-#line 535 "rule.y" /* yacc.c:1646  */
+#line 526 "rule.y" /* yacc.c:1646  */
     {
 				 int a = get_last_index();
 				 int b = a-1;
@@ -2002,7 +2002,7 @@ yyreduce:
     break;
 
   case 74:
-#line 551 "rule.y" /* yacc.c:1646  */
+#line 542 "rule.y" /* yacc.c:1646  */
     {
 				 int a = get_last_index();
 			 	 int b = a-1;
@@ -2022,7 +2022,7 @@ yyreduce:
     break;
 
   case 75:
-#line 567 "rule.y" /* yacc.c:1646  */
+#line 558 "rule.y" /* yacc.c:1646  */
     {
 				 int a = get_last_index();
 				 int b = a-1;
@@ -2042,7 +2042,7 @@ yyreduce:
     break;
 
   case 76:
-#line 583 "rule.y" /* yacc.c:1646  */
+#line 574 "rule.y" /* yacc.c:1646  */
     {
 		 		 int a = get_last_index();
 				 int b = a-1;
@@ -2061,7 +2061,7 @@ yyreduce:
     break;
 
   case 77:
-#line 598 "rule.y" /* yacc.c:1646  */
+#line 589 "rule.y" /* yacc.c:1646  */
     {
 				add_temporary_symbol();
 				int a=find_symbol((yyvsp[0].str), get_curr_prof());
@@ -2077,7 +2077,7 @@ yyreduce:
     break;
 
   case 78:
-#line 610 "rule.y" /* yacc.c:1646  */
+#line 601 "rule.y" /* yacc.c:1646  */
     {
 				add_temporary_symbol();
 				int a=get_last_index();
@@ -2090,7 +2090,7 @@ yyreduce:
     break;
 
   case 79:
-#line 618 "rule.y" /* yacc.c:1646  */
+#line 609 "rule.y" /* yacc.c:1646  */
     {
 				
 				queue_instruction("AFC",15,0);
@@ -2101,7 +2101,7 @@ yyreduce:
     break;
 
   case 80:
-#line 625 "rule.y" /* yacc.c:1646  */
+#line 616 "rule.y" /* yacc.c:1646  */
     {
 				add_temporary_symbol();
 				int a= get_last_index();
@@ -2116,7 +2116,7 @@ yyreduce:
     break;
 
   case 82:
-#line 642 "rule.y" /* yacc.c:1646  */
+#line 633 "rule.y" /* yacc.c:1646  */
     {
 				int z = get_last_index();
 				queue_instruction("AFC",15,z);
@@ -2127,7 +2127,7 @@ yyreduce:
     break;
 
   case 83:
-#line 649 "rule.y" /* yacc.c:1646  */
+#line 640 "rule.y" /* yacc.c:1646  */
     {
 		int a= get_latest_inst() +1;
 		int b=find_symbol((yyvsp[-4].str),0);// the var NameFUNC has stored the index needed for function CALL
@@ -2364,7 +2364,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 654 "rule.y" /* yacc.c:1906  */
+#line 645 "rule.y" /* yacc.c:1906  */
 
 
 

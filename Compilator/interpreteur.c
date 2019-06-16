@@ -141,8 +141,8 @@ return memory[tableIndex];
 }
 
 
-void printInst(int Index){
-	printf("Inst %s a %d b %d \n", instr[Index].operation, instr[Index].a, instr[Index].b); 
+void printInst(int index){
+	printf("Inst %d: %s a=%d, b=%d \n",index, instr[index].operation, instr[index].a, instr[index].b); 
 }
 
 void execute_all_instructions(){
@@ -232,10 +232,9 @@ void instructionExecute(int i){
 
 
 	} else if(strcmp(instr[i].operation, "CALL") == 0){	
-		
-			currentInst= memory[instr[i].a]; // jump at @ stored in variable with index A
-		        recursivity_register[recursivity_depth]=instr[i].b; // storing the return address
-			recursivity_depth++;
+		currentInst= instr[i].a; // jump at @ stored in variable with index A
+	        recursivity_register[recursivity_depth]=instr[i].b; // storing the return address
+		recursivity_depth++;
 	} else if(strcmp(instr[i].operation, "RET") == 0){	
 		
 			recursivity_depth--;

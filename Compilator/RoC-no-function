@@ -1,0 +1,22 @@
+main() {
+
+	int b=7,c;
+	int a=14,i;
+	int g;
+	int max;
+	int z=15;
+
+	daca(a>=c){
+		max=a; 
+	}altfel{
+		max=c;
+	}
+
+	daca(max>=z){
+		g=max; 
+	}altfel{
+		g=z;
+	}
+
+
+}
