@@ -4,17 +4,14 @@ int max(int x,int y){
 	}altfel{
 		intoarce y;
 	}
-
 };
 
 main() {
 
-	int b=7,c;
-	int a=14,i;
-	int g;
-	int max;
-	int z=15;
-	max=max(a,c);
-	g=max(max,z);
+	int c,g,m,a=14,z=15;
+
+	m=max(a,c);
+	g=max(m,z);
 
 }
+

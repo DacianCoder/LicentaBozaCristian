@@ -1,22 +1,17 @@
 main() {
 
-	int b=7,c;
-	int a=14,i;
-	int g;
-	int max;
-	int z=15;
+	int c,g,m,a=14,z=15;
 
 	daca(a>=c){
-		max=a; 
+		m=a; 
 	}altfel{
-		max=c;
+		m=c;
 	}
 
-	daca(max>=z){
-		g=max; 
+	daca(m>=z){
+		g=m; 
 	}altfel{
 		g=z;
 	}
-
-
 }
+

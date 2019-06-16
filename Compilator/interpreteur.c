@@ -1,4 +1,5 @@
 #include "interpreteur.h"
+#include "time.h"
 
 Instruction instr[1024];
 int indexInst = 0;
@@ -8,6 +9,8 @@ int registers[16];
 int recursivity_register[8];
 int recursivity_depth=0;
 int memory[1024];
+
+clock_t start, end;
 
 
 void queue_instruction(char* operation, int a, int b){
@@ -146,10 +149,14 @@ void printInst(int index){
 }
 
 void execute_all_instructions(){
+	start=clock();
 
 	for(currentInst; currentInst<indexInst; currentInst++){
 		instructionExecute(currentInst);
 	}
+
+     end = clock();
+     printf("Timp utilizat pentru simulare : %f\n",((double) (end - start)) / CLOCKS_PER_SEC);
 
 }
 
@@ -232,7 +239,8 @@ void instructionExecute(int i){
 
 
 	} else if(strcmp(instr[i].operation, "CALL") == 0){	
-		currentInst= instr[i].a; // jump at @ stored in variable with index A
+	printf("Call %d  %d  %d\n",i,instr[i].a,memory[instr[i].a]); 
+		currentInst= memory[instr[i].a]; // jump at @ stored in variable with index A
 	        recursivity_register[recursivity_depth]=instr[i].b; // storing the return address
 		recursivity_depth++;
 	} else if(strcmp(instr[i].operation, "RET") == 0){	
