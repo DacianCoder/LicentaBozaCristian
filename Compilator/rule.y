@@ -9,8 +9,7 @@
 	int yylex(void);
 	void yyerror(char*);
 
-
-char* type;
+	char* type;
 %}
 
 %union {
@@ -56,12 +55,10 @@ char* type;
 %token tPLUSEQUAL
 %token tRETURN
 
-
 %left tADD tSUBTRACT
 %left tMULTIPLY tDIVIDE
 
 %type <nb>  tIF tWHILE tFOR tPO tPC tFINSTR 
-
 %%
 
 Main: DeclFunction tMAIN {prof_increment();} tPO tPC Body {} ;
@@ -643,14 +640,6 @@ Function : tVAR tPO{
 		queue_instruction("CALL",b,a);};
 
 %%
-
-
-void yyerror(char *s) {
-	//printf("da-te ba ca cade%d",yylloc.first_line);
-	//printf("da-te ba ca cade%d",yylineno);
-	fprintf(stderr, "error: %s\n", s);
-	exit(1);
-}
 
 int main() {
 	

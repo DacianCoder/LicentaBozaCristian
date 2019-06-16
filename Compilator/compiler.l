@@ -1,7 +1,9 @@
 %{
 #include "rule.tab.h"
-
+#include "y.tab.h"
 %}
+
+%option yylineno
 
 %%
 
@@ -51,9 +53,12 @@ main return tMAIN;
 						return tVAR; };
 
 
+%%
 
-
-
+void yyerror(const char *str){
+    printf("Error | Line: %d\n%s\n",yylineno,str);
+	exit(-1);
+}
 
 
 

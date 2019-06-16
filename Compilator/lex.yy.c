@@ -174,8 +174,27 @@ extern FILE *yyin, *yyout;
 #define EOB_ACT_END_OF_FILE 1
 #define EOB_ACT_LAST_MATCH 2
 
-    #define YY_LESS_LINENO(n)
-    #define YY_LINENO_REWIND_TO(ptr)
+    /* Note: We specifically omit the test for yy_rule_can_match_eol because it requires
+     *       access to the local variable yy_act. Since yyless() is a macro, it would break
+     *       existing scanners that call yyless() from OUTSIDE yylex. 
+     *       One obvious solution it to make yy_act a global. I tried that, and saw
+     *       a 5% performance hit in a non-yylineno scanner, because yy_act is
+     *       normally declared as a register variable-- so it is not worth it.
+     */
+    #define  YY_LESS_LINENO(n) \
+            do { \
+                int yyl;\
+                for ( yyl = n; yyl < yyleng; ++yyl )\
+                    if ( yytext[yyl] == '\n' )\
+                        --yylineno;\
+            }while(0)
+    #define YY_LINENO_REWIND_TO(dst) \
+            do {\
+                const char *p;\
+                for ( p = yy_cp-1; p >= (dst); --p)\
+                    if ( *p == '\n' )\
+                        --yylineno;\
+            }while(0)
     
 /* Return all but the first "n" matched characters back to the input stream. */
 #define yyless(n) \
@@ -339,6 +358,8 @@ void yyfree (void *  );
 
 #define YY_AT_BOL() (YY_CURRENT_BUFFER_LVALUE->yy_at_bol)
 
+/* Begin user sect3 */
+
 typedef unsigned char YY_CHAR;
 
 FILE *yyin = (FILE *) 0, *yyout = (FILE *) 0;
@@ -497,6 +518,12 @@ static yyconst flex_int16_t yy_chk[128] =
        81,   81,   81,   81,   81,   81,   81
     } ;
 
+/* Table of booleans, true if rule could match eol. */
+static yyconst flex_int32_t yy_rule_can_match_eol[36] =
+    {   0,
+0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,     };
+
 static yy_state_type yy_last_accepting_state;
 static char *yy_last_accepting_cpos;
 
@@ -514,8 +541,8 @@ char *yytext;
 #line 1 "compiler.l"
 #line 2 "compiler.l"
 #include "rule.tab.h"
-
-#line 519 "lex.yy.c"
+#include "y.tab.h"
+#line 546 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -733,10 +760,10 @@ YY_DECL
 		}
 
 	{
-#line 6 "compiler.l"
+#line 8 "compiler.l"
 
 
-#line 740 "lex.yy.c"
+#line 767 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -782,6 +809,16 @@ yy_find_action:
 
 		YY_DO_BEFORE_ACTION;
 
+		if ( yy_act != YY_END_OF_BUFFER && yy_rule_can_match_eol[yy_act] )
+			{
+			yy_size_t yyl;
+			for ( yyl = 0; yyl < yyleng; ++yyl )
+				if ( yytext[yyl] == '\n' )
+					   
+    yylineno++;
+;
+			}
+
 do_action:	/* This label is used only to access EOF actions. */
 
 		switch ( yy_act )
@@ -795,184 +832,184 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 8 "compiler.l"
+#line 10 "compiler.l"
 return tINT;
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 9 "compiler.l"
+#line 11 "compiler.l"
 return tSTRING;
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 10 "compiler.l"
+#line 12 "compiler.l"
 return tACO;
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 11 "compiler.l"
+#line 13 "compiler.l"
 return tACC;
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 12 "compiler.l"
+#line 14 "compiler.l"
 return tCONST;
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 13 "compiler.l"
+#line 15 "compiler.l"
 return tADD;
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 14 "compiler.l"
+#line 16 "compiler.l"
 return tSUBTRACT;
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 15 "compiler.l"
+#line 17 "compiler.l"
 return tDIVIDE;
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 16 "compiler.l"
+#line 18 "compiler.l"
 return tMULTIPLY;
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 17 "compiler.l"
+#line 19 "compiler.l"
 return tEQUAL;
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 18 "compiler.l"
+#line 20 "compiler.l"
 return tCHECKHIGHER;
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 19 "compiler.l"
+#line 21 "compiler.l"
 return tCHECKEQ;
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 20 "compiler.l"
+#line 22 "compiler.l"
 return tPO;
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 21 "compiler.l"
+#line 23 "compiler.l"
 return tPC;
 	YY_BREAK
 case 15:
 /* rule 15 can match eol */
 YY_RULE_SETUP
-#line 22 "compiler.l"
+#line 24 "compiler.l"
 ;
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 23 "compiler.l"
+#line 25 "compiler.l"
 return tVIRGULE;
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 24 "compiler.l"
+#line 26 "compiler.l"
 return tDOLLAR;
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 25 "compiler.l"
+#line 27 "compiler.l"
 return tFINSTR;
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 26 "compiler.l"
+#line 28 "compiler.l"
 return tIF;
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 27 "compiler.l"
+#line 29 "compiler.l"
 return tELSE;
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 28 "compiler.l"
+#line 30 "compiler.l"
 return tWHILE;
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 29 "compiler.l"
+#line 31 "compiler.l"
 return tFOR;
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 30 "compiler.l"
+#line 32 "compiler.l"
 return tPLUSPLUS;
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 31 "compiler.l"
+#line 33 "compiler.l"
 return tMINUSMINUS;
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 33 "compiler.l"
+#line 35 "compiler.l"
 return tLESS;
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 34 "compiler.l"
+#line 36 "compiler.l"
 return tLESSEQUAL;
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 35 "compiler.l"
+#line 37 "compiler.l"
 return tMOREEQUAL;
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 38 "compiler.l"
+#line 40 "compiler.l"
 return tMINUSEQUAL;
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 39 "compiler.l"
+#line 41 "compiler.l"
 return tPLUSEQUAL;
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 40 "compiler.l"
+#line 42 "compiler.l"
 return tRETURN;
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 42 "compiler.l"
+#line 44 "compiler.l"
 {
 						yylval.nb = atoi(yytext);
 						return tINTNR;	};
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 46 "compiler.l"
+#line 48 "compiler.l"
 return tPRINTF;
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 48 "compiler.l"
+#line 50 "compiler.l"
 return tMAIN;
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 50 "compiler.l"
+#line 52 "compiler.l"
 {				yylval.str = strdup(yytext);
 						return tVAR; };
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 65 "compiler.l"
+#line 56 "compiler.l"
 ECHO;
 	YY_BREAK
-#line 976 "lex.yy.c"
+#line 1013 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1336,6 +1373,10 @@ static int yy_get_next_buffer (void)
 
 	*--yy_cp = (char) c;
 
+    if ( c == '\n' ){
+        --yylineno;
+    }
+
 	(yytext_ptr) = yy_bp;
 	(yy_hold_char) = *yy_cp;
 	(yy_c_buf_p) = yy_cp;
@@ -1412,6 +1453,11 @@ static int yy_get_next_buffer (void)
 	c = *(unsigned char *) (yy_c_buf_p);	/* cast for 8-bit char's */
 	*(yy_c_buf_p) = '\0';	/* preserve yytext */
 	(yy_hold_char) = *++(yy_c_buf_p);
+
+	if ( c == '\n' )
+		   
+    yylineno++;
+;
 
 	return c;
 }
@@ -1879,6 +1925,9 @@ static int yy_init_globals (void)
      * This function is called from yylex_destroy(), so don't allocate here.
      */
 
+    /* We do not touch yylineno unless the option is enabled. */
+    yylineno =  1;
+    
     (yy_buffer_stack) = 0;
     (yy_buffer_stack_top) = 0;
     (yy_buffer_stack_max) = 0;
@@ -1973,4 +2022,20 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 65 "compiler.l"
+#line 56 "compiler.l"
+
+
+
+void yyerror(const char *str){
+    printf("Error | Line: %d\n%s\n",yylineno,str);
+	exit(-1);
+}
+
+
+
+
+
+
+
+
+

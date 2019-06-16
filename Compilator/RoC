@@ -1,6 +1,6 @@
 int max(int x,int y){
 	daca(x>=y){
-		intoarce x; 
+		intoarce x;
 	}altfel{
 		intoarce y;
 	}
