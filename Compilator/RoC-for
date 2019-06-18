@@ -1,0 +1,9 @@
+main() {
+
+	int a=0,b=40;
+	int c;
+	pentru(a=0;a<b;a++){	
+	c+=3;
+	}
+}
+

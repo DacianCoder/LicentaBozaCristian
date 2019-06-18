@@ -1,0 +1,12 @@
+
+main() {
+
+	int a=0,b=40;
+	int c;
+
+	catTimp(a<b){
+	a++;c+=3;
+	}
+
+}
+

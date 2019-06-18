@@ -122,21 +122,17 @@ process
 -- wait for 50ns;
   wait until rising_edge(Clk); 
   Bus_data <= "ZZZZZZZZZZZZZZZZ";
---  Bus_address <= "ZZZZZZZZ";
- -- Bus_control<= "ZZ";
-  --change everything to double the size of operation 
+  
   if(reg_curr_instr(31 downto 24)= x"00") then-- ADD
-			 if(status=0)then -- we have to put it to status =1 for reasigning the value 
+			 if(status=0) then
 					regSelectorA <=reg(to_integer(unsigned(reg_curr_instr(23 downto 16))));
-					regSelectorB <=reg(to_integer(unsigned(reg_curr_instr(15 downto 0)))); -- maybe 7 downto 0
+					regSelectorB <=reg(to_integer(unsigned(reg_curr_instr(15 downto 0))));
 					status<=status+1;
 					curr_op<=x"00"; 
 				elsif(status=1) then
 					reg(to_integer(unsigned(reg_curr_instr(23 downto 16))))<=result;
 					status<=0;
-					currentInst<= currentInst+1;
-				--	assert false report "Simulation Finished" severity failure;  -- debug stop 
-			 
+					currentInst<= currentInst+1; 
 			 end if;
 	 
   elsif(reg_curr_instr(31 downto 24)= x"01") then-- sub
@@ -210,8 +206,6 @@ process
 				Bus_control<="ZZ"; -- add a default value
 				 Bus_data<="ZZZZZZZZZZZZZZZZ";
 				 currentInst<= currentInst+1;
-				 
-			--	assert false report "Simulation Finished" severity failure;  -- debug stop 
 			 end if;	 
 	 
 	elsif(reg_curr_instr(31 downto 24)= x"06") then-- afc int Rx the value of y
@@ -313,14 +307,28 @@ process
 			end if ;
 	
 	elsif(reg_curr_instr(31 downto 24)= x"0e") then-- CALL
-			reg_recursivity(currentRecursivityLevel)<=std_logic_vector(to_unsigned(currentInst,16)); -- +1 ?!?!
-			currentRecursivityLevel<=currentRecursivityLevel+1;
-			currentInst<=to_integer(unsigned( reg_curr_instr(23 downto 16))) +1;
-				
+			if(status=0)then
+				curr_op<="ZZZZZZZZ";
+				Bus_address<=reg(to_integer(unsigned(reg_curr_instr(23 downto 16))))(7 downto 0);
+				Bus_control<="00";
+				status<=1;
+			elsif(status=1)then
+				status<=2;
+			elsif(status=2)then
+				reg_recursivity(currentRecursivityLevel)<=std_logic_vector(to_unsigned(currentInst,16)); -- +1 ?!?!
+				currentRecursivityLevel<=currentRecursivityLevel+1;
+				currentInst<=to_integer(unsigned(Bus_data))+1;
+				status<=0;
+				Bus_data<="ZZZZZZZZZZZZZZZZ";
+			 end if;	 
+			--currentInst<=to_integer(unsigned( reg_curr_instr(23 downto 16))) +1;
 	 	 
 	elsif(reg_curr_instr(31 downto 24)= x"0F") then-- RET
 			currentRecursivityLevel<=currentRecursivityLevel-1;
 			currentInst<=to_integer(unsigned(reg_recursivity(currentRecursivityLevel-1)))+1; 
+			
+	elsif(reg_curr_instr(31 downto 24)= "UUUUUUUU") then-- RET
+		assert false report "Simulation Finished" severity failure;  -- debug stop 
 	
 	end if;
   
@@ -328,7 +336,6 @@ process
  end process;
  curr_op<="ZZZZZZZZ";
  reg_curr_instr <= instr_mem(currentInst);
- --Bus_data <= data;
 
 end Behavioral;
 
