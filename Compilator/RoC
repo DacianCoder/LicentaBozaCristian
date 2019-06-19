@@ -10,7 +10,7 @@ main() {
 
 	int c,g,m,a=14,z=15;
 
-	m=max(a,c);
+	m=max(a,c)
 	g=max(m,z);
 
 }
